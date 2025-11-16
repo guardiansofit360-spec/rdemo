@@ -1,0 +1,30 @@
+[
+    {
+        "id": "6919f9a23a0bb",
+        "date": "2025-11-16 17:19:46",
+        "items": [
+            {
+                "id": 1,
+                "name": "Fried Chicken",
+                "price": "12.00",
+                "image": "assets\/fried-chicken.jpg",
+                "quantity": 2
+            },
+            {
+                "id": 5,
+                "name": "Grilled Chicken",
+                "price": "14.00",
+                "image": "assets\/chicken.jpg",
+                "quantity": 1
+            }
+        ],
+        "total": 40.5,
+        "delivery_address": "1st H 38 Double Storey",
+        "city": "Shahjahanpur",
+        "zip": "242001",
+        "name": "Nishant Raghav",
+        "phone": "07000454502",
+        "payment_method": "cash",
+        "status": "pending"
+    }
+]
