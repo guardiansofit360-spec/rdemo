@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Order Booking</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="mobile-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="profile-pic">
+                    <img src="assets/profile.jpg" alt="Profile" id="profileImg">
+                </div>
+                
+                <div class="location">
+                    <span class="location-label">Location</span>
+                    <div class="location-value">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>New York, USA</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+                
+                <div class="notification-icon">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge"></span>
+                </div>
+            </div>
+            
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search.." id="searchInput">
+                <button class="filter-btn">
+                    <i class="fas fa-sliders-h"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Promo Banner -->
+            <div class="promo-banner">
+                <div class="promo-content">
+                    <h2 class="promo-discount">27%</h2>
+                    <p class="promo-text">EXTRA<br>DISCOUNT</p>
+                    <p class="promo-subtext">Enjoy your first order with<br>a special discount!</p>
+                </div>
+                <div class="promo-image">
+                    <img src="assets/promo.png" alt="Promo">
+                </div>
+            </div>
+
+            <!-- Categories -->
+            <div class="categories">
+                <div class="category-item active" data-category="burger">
+                    <div class="category-icon">
+                        <img src="assets/burger.jpg" alt="Burger">
+                    </div>
+                    <span>Burger</span>
+                </div>
+                <div class="category-item" data-category="pizza">
+                    <div class="category-icon">
+                        <img src="assets/pizza.jpg" alt="Pizza">
+                    </div>
+                    <span>Pizza</span>
+                </div>
+                <div class="category-item" data-category="fries">
+                    <div class="category-icon">
+                        <img src="assets/fries.jpg" alt="Fries">
+                    </div>
+                    <span>Fries</span>
+                </div>
+                <div class="category-item" data-category="chicken">
+                    <div class="category-icon">
+                        <img src="assets/chicken.jpg" alt="Chicken">
+                    </div>
+                    <span>Chicken</span>
+                </div>
+                <div class="category-item" data-category="pizza">
+                    <div class="category-icon">
+                        <img src="assets/pizza2.jpg" alt="Pizza">
+                    </div>
+                    <span>Pizza</span>
+                </div>
+            </div>
+
+            <!-- Food Items -->
+            <div class="food-items" id="foodItems">
+                <!-- Items will be loaded by JavaScript -->
+            </div>
+        </main>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <a href="index.html" class="nav-item active">
+                <i class="fas fa-home"></i>
+            </a>
+            <a href="orders.html" class="nav-item">
+                <i class="fas fa-receipt"></i>
+            </a>
+            <a href="cart.html" class="nav-item">
+                <i class="fas fa-shopping-bag"></i>
+                <span class="cart-badge" id="cartBadge">0</span>
+            </a>
+            <a href="favorites.html" class="nav-item">
+                <i class="fas fa-heart"></i>
+            </a>
+            <a href="profile.html" class="nav-item">
+                <i class="fas fa-user"></i>
+            </a>
+        </nav>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script>
+        // Load menu items from JSON
+        fetch('data/menu.json')
+            .then(response => response.json())
+            .then(menuItems => {
+                const foodItemsContainer = document.getElementById('foodItems');
+                menuItems.forEach(item => {
+                    const foodCard = `
+                        <div class="food-card" data-id="${item.id}">
+                            ${item.discount ? `<div class="discount-badge">${item.discount}% OFF</div>` : ''}
+                            <div class="food-image">
+                                <img src="${item.image}" alt="${item.name}">
+                            </div>
+                            <button class="favorite-btn">
+                                <i class="far fa-heart"></i>
+                            </button>
+                            <div class="food-info">
+                                <h3>${item.name}</h3>
+                                <p class="restaurant-name">${item.restaurant}</p>
+                                <div class="food-footer">
+                                    <span class="price">$${item.price}</span>
+                                    <button class="add-btn" onclick="addToCart(${item.id})">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    foodItemsContainer.innerHTML += foodCard;
+                });
+            });
+    </script>
+</body>
+</html>
